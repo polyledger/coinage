@@ -1,5 +1,7 @@
 # Coinage
 
+[![npm version](https://badge.fury.io/js/coinage-lib.svg)](https://badge.fury.io/js/coinage-lib)
+
 > A cryptocurrency coin aggregator library
 
 coin·age, *noun*. def: coins collectively.
