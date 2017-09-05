@@ -11,18 +11,20 @@ coin·age, *noun*. def: coins collectively.
 ### Getting Started
 
 ``` javascript
-const Coinage = require('coinage');
+const Coinage = require('coinage-lib');
+
+Coinage.getCoins().then((response) => { ... }).catch((error) => { ... });
 ```
 
 ### Methods
 
 **Coinage.getCoins()**
 
-Returns an array of coin symbols.
+Returns promise that resolves with an array of coin symbols.
 
 **Coinage.getHistory(coin, [type], [period])**
 
-Returns coin history data.
+Returns a promise that resolves with coin history data.
 
 |Argument|Description|
 |--------|-----------|
@@ -32,7 +34,7 @@ Returns coin history data.
 
 **Coinage.getTickers(coins, [currency])**
 
-Returns ticker data for the given coins.
+Returns a promise that resolves with ticker data for the given coins.
 
 |Argument|Description|
 |--------|-----------|
