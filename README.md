@@ -15,9 +15,11 @@ const Coinage = require('coinage');
 ### Methods
 
 **Coinage.getCoins()**
+
 Returns an array of coin symbols.
 
 **Coinage.getHistory(coin, [type], [period])**
+
 Returns coin history data.
 
 |Argument|Description|
@@ -27,6 +29,7 @@ Returns coin history data.
 |period|Optional. Specify either `'1day'`, `'7day'`, `'30day'`, `'90day'`, `'180day'`, or `'365day'`.|
 
 **Coinage.getTickers(coins, [currency])**
+
 Returns ticker data for the given coins.
 
 |Argument|Description|
