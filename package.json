@@ -1,0 +1,28 @@
+{
+  "name": "coinage-lib",
+  "version": "1.0.0",
+  "description": "A coin aggregator library",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --timeout 15000",
+    "lint": "./node_modules/.bin/eslint index.js **/*.js"
+  },
+  "author": {
+    "name": "Matthew Rosendin",
+    "email": "matthew@polyledger.com",
+    "url": "http://polyledger.com/"
+  },
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "eslint": "^4.6.0",
+    "eslint-config-airbnb-base": "^11.3.2",
+    "eslint-plugin-import": "^2.7.0",
+    "mocha": "^3.5.0"
+  },
+  "dependencies": {
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1"
+  }
+}
