@@ -54,19 +54,19 @@ class Coinage {
    */
   static async getTickers(coins, currency = 'USD') {
     // NOTE: The limit of 10 results will be increased in the future.
-    if (!coins) throw new Error("Expected argument 'coins' is missing.")
+    if (!coins) throw new Error("Expected argument 'coins' is missing.");
     const options = {
       url: 'https://api.coinmarketcap.com/v1/ticker/',
       params: [`convert=${currency}`, `limit=${constants.LIMIT}`],
     };
     let response = await request({
       method: 'GET',
-      url: Coinage.appendUrlParams(options)
+      url: Coinage.appendUrlParams(options),
     });
     response = JSON.parse(response);
-    return response.filter((element) => {
-      return coins.includes(element.symbol);
-    });
+    return response.filter(element =>
+      coins.includes(element.symbol),
+    );
   }
 
   /**
@@ -91,7 +91,7 @@ class Coinage {
   static appendUrlParams(options) {
     const url = options.url;
     let params = options.params.join('&');
-    params = '?' + params;
+    params = `?${params}`;
     return url + params;
   }
 

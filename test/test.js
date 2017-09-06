@@ -57,10 +57,11 @@ describe('Coinage', () => {
   });
 
   describe('#getTickers()', () => {
-    it('should return ticker data', () => {
+    it('should return ticker data', (done) => {
       Coinage.getTickers(['ETH', 'BTC']).then((response) => {
         expect(response).to.be.an('array');
         expect(response.length).to.equal(2);
+        done();
       }).catch((error) => { done(error); });
     });
 
@@ -76,9 +77,9 @@ describe('Coinage', () => {
 
     it('should format basic URL parameters', () => {
       options.params = ['foo=bar', 'baz=qux'];
-      const expected = 'https://www.polyledger.io/' + '?foo=bar&baz=qux';
+      const expected = 'https://www.polyledger.io/?foo=bar&baz=qux';
       assert.equal(expected, Coinage.appendUrlParams(options));
-    })
+    });
   });
 
   describe('#appendUrlPath()', () => {
