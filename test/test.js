@@ -12,62 +12,90 @@ chai.use(chaiAsPromised);
 describe('Coinage', () => {
   describe('#getCoins()', () => {
     it('should return an array of coins', (done) => {
-      Coinage.getCoins().then((response) => {
-        expect(response).to.be.an('array');
-        done();
-      }).catch((error) => { done(error); });
+      Coinage.getCoins()
+        .then((response) => {
+          expect(response).to.be.an('array');
+          done();
+        })
+        .catch((error) => {
+          done(error);
+        });
     });
   });
 
   describe('#getHistory()', () => {
-    it('should throw an error if the \'coin\' parameter is missing', () =>
-      expect(Coinage.getHistory()).to.be.rejectedWith(Error),
-    );
+    it("should throw an error if the 'coin' parameter is missing", () =>
+      expect(Coinage.getHistory()).to.be.rejectedWith(Error));
 
-    it('should return a history object when \'type\' and \'period\' parameters are not specified', (done) => {
-      Coinage.getHistory('BTC').then((response) => {
-        expect(response).to.be.an('object');
-        done();
-      }).catch((error) => { done(error); });
+    it("should return a history object when 'type' and 'period' parameters are not specified", (done) => {
+      Coinage.getHistory('BTC')
+        .then((response) => {
+          expect(response).to.be.an('object');
+          done();
+        })
+        .catch((error) => {
+          done(error);
+        });
     });
 
-    it('should return a history object when the \'type\' parameter is not specified', (done) => {
-      Coinage.getHistory('BTC', null, '1day').then((response) => {
-        expect(response).to.be.an('object');
-        expect(response).to.have.keys(['price', 'market_cap', 'volume']);
-        done();
-      }).catch((error) => { done(error); });
+    it("should return a history object when the 'type' parameter is not specified", (done) => {
+      Coinage.getHistory('BTC', null, '1day')
+        .then((response) => {
+          expect(response).to.be.an('object');
+          expect(response).to.have.keys(['price', 'market_cap', 'volume']);
+          done();
+        })
+        .catch((error) => {
+          done(error);
+        });
     });
 
-    it('should return history arrays for all possible values of the \'type\' parameter when the \'period\' parameter is not specified', (done) => {
+    it("should return history arrays for all possible values of the 'type' parameter when the 'period' parameter is not specified", (done) => {
       const types = ['market_cap', 'price', 'volume'];
       let count = 0;
       types.forEach((element, index, array) => {
-        Coinage.getHistory('BTC', element).then((response) => {
-          expect(response).to.be.an('array');
-          count += 1;
-          if (count === array.length) done();
-        }).catch((error) => { done(error); });
+        Coinage.getHistory('BTC', element)
+          .then((response) => {
+            expect(response).to.be.an('array');
+            count += 1;
+            if (count === array.length) done();
+          })
+          .catch((error) => {
+            done(error);
+          });
       });
     });
 
-    it('should throw an error if the \'type\' parameter is invalid', () =>
-      expect(Coinage.getHistory('BTC', 'invalid')).to.be.rejectedWith(Error),
-    );
+    it("should throw an error if the 'type' parameter is invalid", () =>
+      expect(Coinage.getHistory('BTC', 'invalid')).to.be.rejectedWith(Error));
   });
 
   describe('#getTickers()', () => {
     it('should return ticker data', (done) => {
-      Coinage.getTickers(['ETH', 'BTC']).then((response) => {
-        expect(response).to.be.an('array');
-        expect(response.length).to.equal(2);
-        done();
-      }).catch((error) => { done(error); });
+      Coinage.getTickers(['ETH', 'BTC'])
+        .then((response) => {
+          expect(response).to.be.an('array');
+          expect(response.length).to.equal(2);
+          done();
+        })
+        .catch((error) => {
+          done(error);
+        });
     });
 
-    it('should throw an error if the \'coins\' parameter is missing.', () =>
-      expect(Coinage.getTickers()).to.be.rejectedWith(Error),
-    );
+    it('should default to a limit of 100', (done) => {
+      Coinage.getTickers().then((response) => {
+        expect(response.length).to.equal(100);
+        done();
+      });
+    });
+
+    it('should return all results with a limit of 0', (done) => {
+      Coinage.getTickers([], 'USD', 0).then((response) => {
+        expect(response.length).to.be.above(100);
+        done();
+      });
+    });
   });
 
   describe('#appendUrlParams()', () => {

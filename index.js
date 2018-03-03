@@ -48,25 +48,25 @@ class Coinage {
    * @function getTickers
    * @param {string[]} coins
    * @param {string} currency
+   * @param {number} limit
    * @returns {array}
-   * Gets ticker data for the top 10 (current limit) coins and filters results
+   * Gets ticker data for the top 100 (default limit) coins and filters results
    * based on the 'coins' parameter. The currency defaults to USD.
    */
-  static async getTickers(coins, currency = 'USD') {
-    // NOTE: The limit of 10 results will be increased in the future.
-    if (!coins) throw new Error("Expected argument 'coins' is missing.");
+  static async getTickers(coins = [], currency = 'USD', limit = constants.LIMIT) {
     const options = {
       url: 'https://api.coinmarketcap.com/v1/ticker/',
-      params: [`convert=${currency}`, `limit=${constants.LIMIT}`],
+      params: [`convert=${currency}`, `limit=${limit}`],
     };
     let response = await request({
       method: 'GET',
       url: Coinage.appendUrlParams(options),
     });
     response = JSON.parse(response);
-    return response.filter(element =>
-      coins.includes(element.symbol),
-    );
+    if (coins.length) {
+      return response.filter(element => coins.includes(element.symbol));
+    }
+    return response;
   }
 
   /**
