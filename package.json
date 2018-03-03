@@ -1,6 +1,6 @@
 {
   "name": "coinage-lib",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A coin aggregator library",
   "main": "index.js",
   "scripts": {
